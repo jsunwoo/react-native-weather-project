@@ -1,21 +1,36 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import { red } from './node_modules/ansi-colors';
-import Weather from './Weather';
+import React, { Component } from "react";
+import { StyleSheet, Text, View, StatusBar } from "react-native";
+import Weather from "./Weather";
 
 export default class App extends Component {
   state = {
-    isLoaded: true
+    isLoaded: false
+  };
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        console.log(position);
+        this.setState({
+          isLoaded: true
+        });
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
   render() {
     const { isLoaded } = this.state;
     return (
       <View style={styles.container}>
-        {isLoaded ? <Weather/> : (
-        <View style={styles.loading}>
-          <Text style={styles.loadingText}>Getting the pretty weather</Text>
-        </View>
-      )}
+        <StatusBar hidden={true} />
+        {isLoaded ? (
+          <Weather />
+        ) : (
+          <View style={styles.loading}>
+            <Text style={styles.loadingText}>Getting the pretty weather</Text>
+          </View>
+        )}
       </View>
     );
   }
@@ -24,17 +39,16 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: "#fff"
   },
   loading: {
-    flex : 1,
-    backgroundColor: '#fdf6aa',
-    justifyContent: 'flex-end',
+    flex: 1,
+    backgroundColor: "#fdf6aa",
+    justifyContent: "flex-end",
     paddingLeft: 25
   },
   loadingText: {
     fontSize: 38,
     marginBottom: 100
   }
-  
 });
