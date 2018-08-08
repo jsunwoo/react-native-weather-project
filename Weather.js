@@ -17,29 +17,11 @@ const weatherCases = {
     subtitles: "Go get some Vitamin D",
     icon: "ios-sunny"
   },
-  Thunderstorm: {
-    colors: ["#00ECBC", "#007ADF"],
-    title: "Thunderstorm in the house",
-    subtitles: "Actually, outside of the house",
-    icon: "ios-thunderstorm"
-  },
   Clouds: {
     colors: ["#D7D2CC", "#304352"],
     title: "Clouds",
     subtitles: "I know, it is boring",
     icon: "ios-cloudy"
-  },
-  Snow: {
-    colors: ["#7DE2FC", "#B9B6E5"],
-    title: "Cold as icecream",
-    subtitles: "Do you want to build a snowman",
-    icon: "ios-snow"
-  },
-  Drizzle: {
-    colors: ["#89F7FE", "#66A6FF"],
-    title: "Drizzle",
-    subtitles: "Is like rain, but different",
-    icon: "ios-rainy-outline"
   }
 };
 
