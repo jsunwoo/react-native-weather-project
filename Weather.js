@@ -4,6 +4,44 @@ import { LinearGradient } from "expo";
 import { Ionicons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 
+const weatherCases = {
+  Rain: {
+    colors: ["#00C6FB", "#005BEA"],
+    title: "Raining like a poet",
+    subtitles: "For more info look outside",
+    icon: "ios-rainy"
+  },
+  Clear: {
+    colors: ["#FEF253", "#FF7300"],
+    title: "Sunny as hell",
+    subtitles: "Go get some Vitamin D",
+    icon: "ios-sunny"
+  },
+  Thunderstorm: {
+    colors: ["#00ECBC", "#007ADF"],
+    title: "Thunderstorm in the house",
+    subtitles: "Actually, outside of the house",
+    icon: "ios-thunderstorm"
+  },
+  Clouds: {
+    colors: ["#D7D2CC", "#304352"],
+    title: "Clouds",
+    subtitles: "I know, it is boring",
+    icon: "ios-cloudy"
+  },
+  Snow: {
+    colors: ["#7DE2FC", "#B9B6E5"],
+    title: "Cold as icecream",
+    subtitles: "Do you want to build a snowman",
+    icon: "ios-snow"
+  },
+  Drizzle: {
+    colors: ["#89F7FE", "#66A6FF"],
+    title: "Drizzle",
+    subtitles: "Is like rain, but different",
+    icon: "ios-rainy-outline"
+  }
+};
 
 // export default class Weather extends Component {
 //     render() {
@@ -28,18 +66,22 @@ import PropTypes from "prop-types";
 
 function Weather({ temp }) {
   return (
-    <LinearGradient colors={["#00C6FB", "#005BEA"]} style={styles.container}>
+    <LinearGradient colors={weatherCases["Snow"].colors} style={styles.container}>
       <View style={styles.upper}>
-        <Ionicons color="white" size={144} name="ios-rainy" />
+        <Ionicons color="white" size={144} name={weatherCases["Snow"].icon} />
         <Text style={styles.temp}>{temp}˚</Text>
       </View>
       <View style={styles.lower}>
-        <Text style={styles.title}>Raining like a poet</Text>
-        <Text style={styles.subtitle}>For more info look outside</Text>
+        <Text style={styles.title}>{weatherCases["Snow"].title}</Text>
+        <Text style={styles.subtitle}>{weatherCases["Snow"].subtitles}</Text>
       </View>
     </LinearGradient>
   );
 }
+
+Weather.propTypes = {
+  temp: PropTypes.number.isRequired
+};
 
 export default Weather;
 
