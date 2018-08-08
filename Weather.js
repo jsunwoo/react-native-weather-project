@@ -1,68 +1,88 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from "expo";
-import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 
 const weatherCases = {
+  Thunderstorm: {
+    colors: ["#00ECBC", "#007ADF"],
+    title: "Thunderstorm in the house",
+    subtitles: "Actually, outside of the house",
+    icon: "weather-lightning"
+  },
+  Drizzle: {
+    colors: ["#89F7FE", "#66A6FF"],
+    title: "Drizzle",
+    subtitles: "Is like rain, but different",
+    icon: "weather-rainy"
+  },
   Rain: {
     colors: ["#00C6FB", "#005BEA"],
     title: "Raining like a poet",
     subtitles: "For more info look outside",
-    icon: "ios-rainy"
+    icon: "weather-pouring"
+  },
+  Snow: {
+    colors: ["#7DE2FC", "#B9B6E5"],
+    title: "Cold as icecream",
+    subtitles: "Do you want to build a snowman",
+    icon: "weather-snowy"
   },
   Clear: {
     colors: ["#FEF253", "#FF7300"],
     title: "Sunny as hell",
     subtitles: "Go get some Vitamin D",
-    icon: "ios-sunny"
+    icon: "weather-sunny"
   },
   Clouds: {
     colors: ["#D7D2CC", "#304352"],
     title: "Clouds",
     subtitles: "I know, it is boring",
-    icon: "ios-cloudy"
+    icon: "weather-cloudy"
+  },
+  Haze: {
+    colors: ["#D7D2CC", "#304352"],
+    title: "Haze",
+    subtitles: "Watch out when you driving!",
+    icon: "weather-fog"
+  },
+  Mist: {
+    colors: ["#D7D2CC", "#304352"],
+    title: "Mist",
+    subtitles: "Watch out when you driving!",
+    icon: "weather-fogy"
   }
 };
 
-// export default class Weather extends Component {
-//     render() {
-//         return (
-//             <LinearGradient
-//                 colors={['#00C6FB', '#005BEA']}
-//                 style={styles.container}>
-
-//                 <View style={styles.upper}>
-//                     <Ionicons color='white' size={144} name='ios-rainy'/>
-//                     <Text style={styles.temp}>35˚</Text>
-//                 </View>
-//                 <View style={styles.lower}>
-//                     <Text style={styles.title}>Raining like a poet</Text>
-//                     <Text style={styles.subtitle}>For more info look outside</Text>
-//                 </View>
-//             </LinearGradient>
-//         )
-
-//     }
-// }
-
-function Weather({ temp }) {
+function Weather({ weatherName, temp }) {
   return (
-    <LinearGradient colors={weatherCases["Snow"].colors} style={styles.container}>
+    <LinearGradient
+      colors={weatherCases[weatherName].colors}
+      style={styles.container}
+    >
       <View style={styles.upper}>
-        <Ionicons color="white" size={144} name={weatherCases["Snow"].icon} />
+        <MaterialCommunityIcons
+          color="white"
+          size={144}
+          name={weatherCases[weatherName].icon}
+        />
         <Text style={styles.temp}>{temp}˚</Text>
       </View>
       <View style={styles.lower}>
-        <Text style={styles.title}>{weatherCases["Snow"].title}</Text>
-        <Text style={styles.subtitle}>{weatherCases["Snow"].subtitles}</Text>
+        <Text style={styles.title}>{weatherCases[weatherName].title}</Text>
+        <Text style={styles.subtitle}>
+          {weatherCases[weatherName].subtitles}
+        </Text>
       </View>
     </LinearGradient>
   );
 }
 
+// what is this? is this necessary?
 Weather.propTypes = {
-  temp: PropTypes.number.isRequired
+  temp: PropTypes.number.isRequired,
+  weatherName: PropTypes.string.isRequired
 };
 
 export default Weather;

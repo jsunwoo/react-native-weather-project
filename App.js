@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import Weather from "./Weather";
 
-const API_KEY="dc87f6dd2324cb5ad1fac7bd27052351";
+const API_KEY = "dc87f6dd2324cb5ad1fac7bd27052351";
 
 export default class App extends Component {
   state = {
@@ -15,8 +15,8 @@ export default class App extends Component {
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
-        console.log(position)
-        this._getWeather(position.coords.latitude, position.coords.longitude)
+        console.log(position);
+        this._getWeather(position.coords.latitude, position.coords.longitude);
       },
       error => {
         this.setState({
@@ -26,26 +26,33 @@ export default class App extends Component {
     );
   }
 
-  _getWeather= (lat, long) => {
-    fetch('https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+long+'&APPID='+API_KEY)
-    .then(response => response.json())
-    .then(json => {
-      console.log(json);
-      this.setState({
-        temperature: json.main.temp,
-        name: json.weather[0].main,
-        isLoaded: true
-      })
-    });
+  _getWeather = (lat, long) => {
+    fetch(
+      "https://api.openweathermap.org/data/2.5/weather?lat=" +
+        lat +
+        "&lon=" +
+        long +
+        "&APPID=" +
+        API_KEY
+    )
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        this.setState({
+          temperature: json.main.temp,
+          name: json.weather[0].main,
+          isLoaded: true
+        });
+      });
   };
 
   render() {
-    const { isLoaded, error, temperature } = this.state;
+    const { isLoaded, error, temperature, name } = this.state;
     return (
       <View style={styles.container}>
         <StatusBar hidden={true} />
         {isLoaded ? (
-          <Weather temp={Math.floor(temperature - 273.15)}/>
+          <Weather weatherName={name} temp={Math.floor(temperature - 273.15)} />
         ) : (
           <View style={styles.loading}>
             <Text style={styles.loadingText}>Getting the pretty weather</Text>
